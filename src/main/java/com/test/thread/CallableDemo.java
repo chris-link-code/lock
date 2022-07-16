@@ -12,7 +12,7 @@ import java.util.concurrent.FutureTask;
  */
 @Slf4j
 public class CallableDemo {
-    public void callableTest(){
+    public void callableTest() {
         Callable<String> callable = new Callable<String>() {
             @Override
             public String call() {
@@ -21,19 +21,20 @@ public class CallableDemo {
         };
         FutureTask<String> futureTask = new FutureTask<>(callable);
 
-        if(futureTask.isDone()){
+        if (futureTask.isDone()) {
             log.info("future task is done");
-        }else {
+        } else {
             log.info("future task is not done");
         }
 
-        new Thread(futureTask,"A").start();
+        new Thread(futureTask, "A").start();
 
-        while (!futureTask.isDone()){}
+        while (!futureTask.isDone()) {
+        }
 
-        if(futureTask.isDone()){
+        if (futureTask.isDone()) {
             log.info("future task is done");
-        }else {
+        } else {
             log.info("future task is not done");
         }
 
