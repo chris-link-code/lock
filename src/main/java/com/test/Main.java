@@ -1,7 +1,9 @@
 package com.test;
 
-import com.test.thread.*;
+import com.test.thread.FutureDemo;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Main {
     public static void main(String[] args) {
         //new CallableDemo().callableTest();
@@ -12,6 +14,10 @@ public class Main {
 
         //new SemaphoreDemo().semaphoreTest();
 
-        new ReadWriteLockDemo().readWriteLockTest();
+        //new ReadWriteLockDemo().readWriteLockTest();
+
+        new FutureDemo().futureTest();
+
+        log.info("end main()");
     }
 }
