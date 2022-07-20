@@ -11,18 +11,30 @@ import java.util.concurrent.*;
 @Slf4j
 public class FutureDemo {
     public void futureTest() {
-        int processors = Runtime.getRuntime().availableProcessors();
-        log.info("processors: " + processors);
-        ExecutorService executor = Executors.newFixedThreadPool(processors);
+        int processors;
+        ExecutorService executor = null;
+        try {
+            processors = Runtime.getRuntime().availableProcessors();
+            log.info("processors: " + processors);
 
-        //runAsync(executor);
-        supplyAsync(executor);
+            executor = Executors.newFixedThreadPool(processors);
 
-        executor.shutdown();
+            //runAsync(executor);
+            //supplyAsync(executor);
+            whenSupplyAsync(executor);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            if (executor != null) {
+                executor.shutdown();
+                log.info("executor shutdown");
+            }
+        }
     }
 
     /**
      * 没有返回值的异步
+     *
      * @param executor
      */
     public void runAsync(Executor executor) {
@@ -51,6 +63,7 @@ public class FutureDemo {
 
     /**
      * 有返回值的异步
+     *
      * @param executor
      */
     public void supplyAsync(Executor executor) {
@@ -68,8 +81,6 @@ public class FutureDemo {
             return "This is supplyAsync()";
         }, executor);
 
-        log.info("do something else");
-
         try {
             log.info(future.get());
         } catch (InterruptedException e) {
@@ -77,33 +88,35 @@ public class FutureDemo {
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
+
+        log.info("do something else");
         log.info("end supplyAsync()");
     }
 
     public void whenSupplyAsync(Executor executor) {
-        log.info("supplyAsync()");
+        log.info("whenSupplyAsync()");
 
         // 不要用new创建CompletableFuture，用runAsync()、supplyAsync()方法
         // Future<String> future = new CompletableFuture<>();
-        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+        CompletableFuture.supplyAsync(() -> {
             log.info(Thread.currentThread().getName());
             try {
                 TimeUnit.SECONDS.sleep(3);
             } catch (InterruptedException e) {
                 log.error(e.getMessage(), e);
             }
-            return "This is supplyAsync()";
-        }, executor);
+            return "This is whenSupplyAsync()";
+            //此处要使用线程池，否则如果主线程先结束，默认线程池会自动关闭，则不会执行whenComplete内的内容
+        }, executor).whenComplete((v, e) -> {
+            if (e == null) {
+                log.info("run complete, get --> " + v);
+            }
+        }).exceptionally(e -> {
+            log.error(e.getMessage(), e);
+            return null;
+        });
 
         log.info("do something else");
-
-        try {
-            log.info(future.get());
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        }
-        log.info("end supplyAsync()");
+        log.info("end whenSupplyAsync()");
     }
 }
