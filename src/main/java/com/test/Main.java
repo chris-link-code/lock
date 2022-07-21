@@ -20,11 +20,19 @@ public class Main {
         // TODO 创建没有构造函数的对象时会怎么样
         //new FutureDemo().futureTest();
 
-        extendsTest();
+        //extendsTest();
+
+        //log.info(ThreadLocalRandom.current().nextDouble() * 2 + "mysql".charAt(0) + "");
 
         log.info("end main()");
     }
 
+    /**
+     * 测试继承
+     * 子类会自动调用父类的无参构造
+     * 调用父类的有参构造需要用super()
+     * 如果子类调用了父类得有参构造，则不会自动调用父类的无参构造
+     */
     private static void extendsTest() {
         System.out.println("------SubClass 类继承------");
         System.out.println("new SubClass():");
