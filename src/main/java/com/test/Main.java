@@ -2,6 +2,7 @@ package com.test;
 
 import com.test.extend.SubClass;
 import com.test.extend.SubClass2;
+import com.test.thread.FutureDemo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -18,11 +19,10 @@ public class Main {
         //new ReadWriteLockDemo().readWriteLockTest();
 
         // TODO 创建没有构造函数的对象时会怎么样
-        //new FutureDemo().futureTest();
+        new FutureDemo().futureTest();
 
         //extendsTest();
 
-        //log.info(ThreadLocalRandom.current().nextDouble() * 2 + "mysql".charAt(0) + "");
 
         log.info("end main()");
     }
