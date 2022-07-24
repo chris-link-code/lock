@@ -101,7 +101,7 @@ public class FutureDemo {
         CompletableFuture.supplyAsync(() -> {
             log.info(Thread.currentThread().getName());
             try {
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(300);
             } catch (InterruptedException e) {
                 log.error(e.getMessage(), e);
             }
