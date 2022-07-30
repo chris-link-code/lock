@@ -3,7 +3,6 @@ package com.test.thread;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 /**
@@ -13,24 +12,13 @@ import java.util.concurrent.FutureTask;
 @Slf4j
 public class CallableDemo {
     public void callableTest() {
-        Callable<String> callable = new Callable<String>() {
-            @Override
-            public String call() {
-                return Thread.currentThread().getName() + " is running callable";
-            }
+        Callable<String> callable = () -> {
+            String currentThread = Thread.currentThread().getName();
+            return currentThread + " is running";
         };
         FutureTask<String> futureTask = new FutureTask<>(callable);
 
-        if (futureTask.isDone()) {
-            log.info("future task is done");
-        } else {
-            log.info("future task is not done");
-        }
-
         new Thread(futureTask, "A").start();
-
-        while (!futureTask.isDone()) {
-        }
 
         if (futureTask.isDone()) {
             log.info("future task is done");
@@ -40,9 +28,7 @@ public class CallableDemo {
 
         try {
             log.info(futureTask.get());
-        } catch (InterruptedException e) {
-            log.error(e.getMessage(), e);
-        } catch (ExecutionException e) {
+        } catch (Throwable e) {
             log.error(e.getMessage(), e);
         }
     }
