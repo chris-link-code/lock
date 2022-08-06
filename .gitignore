@@ -38,4 +38,14 @@ build/
 .DS_Store
 /.idea/uiDesigner.xml
 
-/log/*
+
+
+
+
+
+
+
+
+/.idea
+/log
+/target
