@@ -1,13 +1,13 @@
 package com.test;
 
-import com.test.thread.GetCatFeture;
+import com.test.thread.CompletableFutureDemo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Main {
     public static void main(String[] args) {
-        int processors = Runtime.getRuntime().availableProcessors();
-        log.info("processors: " + processors);
+        //int processors = Runtime.getRuntime().availableProcessors();
+        //log.info("processors: " + processors);
 
         // new CallableDemo().callableTest();
 
@@ -25,7 +25,9 @@ public class Main {
 
         //new GetCat().getAge();
 
-        new GetCatFeture().getAge();
+        // new GetCatFeture().getAge();
+
+        new CompletableFutureDemo().futureTest();
 
         log.info("end main()");
     }
