@@ -96,7 +96,7 @@ public class CompletableFutureDemo {
             } catch (InterruptedException ex) {
                 log.error(e.getMessage(), e);
             }
-            int i = 1 / 0;
+            //int i = 1 / 0;
             log.info("step 2");
             return v + 2;
         }).handle((v,e) -> {
