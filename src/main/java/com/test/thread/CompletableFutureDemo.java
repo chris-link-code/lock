@@ -34,6 +34,7 @@ public class CompletableFutureDemo {
     /**
      * 多个步骤都是由同一线程执行
      * 若其中一步报错，则程序终止
+     *
      * @param executor 线程池
      */
     public void supply(Executor executor) {
@@ -78,6 +79,7 @@ public class CompletableFutureDemo {
     /**
      * 多个步骤都是由同一线程执行
      * 若其中一步报错，剩下的步骤依然可以继续执行
+     *
      * @param executor 线程池
      */
     public void handle(Executor executor) {
@@ -90,7 +92,7 @@ public class CompletableFutureDemo {
             }
             log.info("step 1");
             return 1;
-        }, executor).handle((v,e) -> {
+        }, executor).handle((v, e) -> {
             try {
                 TimeUnit.MILLISECONDS.sleep(1000);
             } catch (InterruptedException ex) {
@@ -99,7 +101,7 @@ public class CompletableFutureDemo {
             //int i = 1 / 0;
             log.info("step 2");
             return v + 2;
-        }).handle((v,e) -> {
+        }).handle((v, e) -> {
             try {
                 TimeUnit.MILLISECONDS.sleep(1000);
             } catch (InterruptedException ex) {
