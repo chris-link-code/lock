@@ -13,10 +13,10 @@
         <maven.compiler.target>17</maven.compiler.target>
         <maven-assembly-plugin.version>3.4.0</maven-assembly-plugin.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <slf4j-api.version>1.7.36</slf4j-api.version>
+        <slf4j-api.version>2.0.5</slf4j-api.version>
         <lombok.version>1.18.24</lombok.version>
-        <logback.version>1.2.11</logback.version>
-        <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
+        <logback.version>1.4.5</logback.version>
+        <junit-jupiter-api.version>5.9.0</junit-jupiter-api.version>
     </properties>
 
     <!--IDEA 2021.2.2 最高只支持 maven 3.6.3-->
