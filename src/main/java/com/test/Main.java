@@ -36,7 +36,9 @@ public class Main {
 
         //new CompletableFutureDemo().futureTest();
 
-        new VolatileDemo().volatileTest();
+        //new VolatileDemo().volatileTest();
+
+        new VolatileDemo().volatileTest1();
 
         log.info("end main()");
     }

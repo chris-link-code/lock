@@ -10,31 +10,41 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class VolatileDemo {
-    private int count = 16;
+    private volatile int count = 0;
 
+    /**
+     * volatile不具有原子性
+     */
     public void volatileTest() {
-        new Thread(() -> {
-            for (int i = 0; i < 4; i++) {
-                try {
-                    TimeUnit.MILLISECONDS.sleep(100);
-                } catch (InterruptedException e) {
-                    log.error(e.getMessage(), e);
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                for (int j = 0; j < 1000; j++) {
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(10);
+                    } catch (InterruptedException e) {
+                        log.error(e.getMessage(), e);
+                    }
+                    count++;
+                    if (count > 8000) {
+                        log.info("count: {}", count);
+                    }
                 }
-                count--;
-                log.info("count: {}", count);
-            }
-        }, "T_1").start();
+            }, "T_" + i).start();
+        }
+    }
 
-        new Thread(() -> {
-            for (int i = 0; i < 4; i++) {
-                count--;
-                try {
-                    TimeUnit.MILLISECONDS.sleep(100);
-                } catch (InterruptedException e) {
-                    log.error(e.getMessage(), e);
+
+    public void volatileTest1() {
+        for (int i = 0; i < 10_000; i++) {
+            new Thread(() -> {
+                int x = 1;
+                int y = 2;
+                x = x + x;
+                y = x + y;
+                if (y == 3) {
+                    log.info("y: {}", y);
                 }
-                log.info("count: {}", count);
-            }
-        }, "T_2").start();
+            }, "T" + i).start();
+        }
     }
 }
