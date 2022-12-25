@@ -19,18 +19,17 @@ public class VolatileDemo {
         for (int i = 0; i < 10; i++) {
             new Thread(() -> {
                 for (int j = 0; j < 1000; j++) {
-                    try {
-                        TimeUnit.MILLISECONDS.sleep(10);
-                    } catch (InterruptedException e) {
-                        log.error(e.getMessage(), e);
-                    }
+                    // count++是非原子操作，包括"加载，计算，赋值"三步
                     count++;
-                    if (count > 8000) {
-                        log.info("count: {}", count);
-                    }
                 }
             }, "T_" + i).start();
         }
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
+        }
+        log.info("count: {}", count);
     }
 
     private volatile boolean flag = true;
