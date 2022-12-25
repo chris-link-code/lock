@@ -36,9 +36,9 @@ public class Main {
 
         //new CompletableFutureDemo().futureTest();
 
-        //new VolatileDemo().volatileTest();
+        //new VolatileDemo().volatileAtomicity();
 
-        new VolatileDemo().volatileTest1();
+        new VolatileDemo().volatileVisibility();
 
         log.info("end main()");
     }

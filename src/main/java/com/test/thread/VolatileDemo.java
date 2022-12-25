@@ -15,7 +15,7 @@ public class VolatileDemo {
     /**
      * volatile不具有原子性
      */
-    public void volatileTest() {
+    public void volatileAtomicity() {
         for (int i = 0; i < 10; i++) {
             new Thread(() -> {
                 for (int j = 0; j < 1000; j++) {
@@ -33,18 +33,32 @@ public class VolatileDemo {
         }
     }
 
+    private volatile boolean flag = true;
 
-    public void volatileTest1() {
-        for (int i = 0; i < 10_000; i++) {
-            new Thread(() -> {
-                int x = 1;
-                int y = 2;
-                x = x + x;
-                y = x + y;
-                if (y == 3) {
-                    log.info("y: {}", y);
-                }
-            }, "T" + i).start();
+    /**
+     * 证明volatile的可见性
+     * 如果flag不加volatile修饰，T_1线程会一直执行
+     */
+    public void volatileVisibility() {
+        new Thread(() -> {
+            log.info("flag: {}", flag);
+            while (flag) {
+            }
+            log.info("Thread is complete");
+        }, "T_1").start();
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
         }
+
+        new Thread(() -> {
+            flag = false;
+            log.info("flag: {}", flag);
+            log.info("Thread is complete");
+        }, "T_2").start();
+
+        log.info("end flag: {}", flag);
     }
 }
