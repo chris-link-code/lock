@@ -60,4 +60,12 @@ public class VolatileDemo {
 
         log.info("end flag: {}", flag);
     }
+
+
+    /**
+     * 证明volatile的有序性
+     */
+    public void volatileOrder() {
+
+    }
 }
