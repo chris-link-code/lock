@@ -66,6 +66,6 @@ public class VolatileDemo {
      * 证明volatile的有序性
      */
     public void volatileOrder() {
-
     }
+    
 }

@@ -1,6 +1,6 @@
 package com.test;
 
-import com.test.thread.VolatileDemo;
+import com.test.thread.CASDemo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -36,9 +36,11 @@ public class Main {
 
         //new CompletableFutureDemo().futureTest();
 
-        new VolatileDemo().volatileAtomicity();
+        //new VolatileDemo().volatileAtomicity();
 
         //new VolatileDemo().volatileVisibility();
+
+        new CASDemo().atomicTest();
 
         log.info("end main()");
     }
