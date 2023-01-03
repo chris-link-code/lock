@@ -1,6 +1,6 @@
 package com.test;
 
-import com.test.thread.CASDemo;
+import com.test.thread.CountSpeedDemo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -40,7 +40,9 @@ public class Main {
 
         //new VolatileDemo().volatileVisibility();
 
-        new CASDemo().atomicTest();
+        //new CASDemo().atomicTest();
+
+        new CountSpeedDemo().calculate();
 
         log.info("end main()");
     }

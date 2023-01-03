@@ -10,6 +10,9 @@ import java.util.concurrent.CountDownLatch;
  */
 @Slf4j
 public class CountDownLatchDemo {
+    /**
+     * 根据CountDownLatch判断所有线程全部执行完毕
+     */
     public void countDownLatchTest() {
         CountDownLatch count = new CountDownLatch(10);
 
