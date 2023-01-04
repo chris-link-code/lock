@@ -12,13 +12,15 @@ import java.util.concurrent.atomic.LongAdder;
  * @author chris
  * @create 2023/1/3
  * 多线程累加
- * LongAdder和LongAccumulator远远快于其他方法
  * synchronized的i++最慢
+ * LongAdder和LongAccumulator远远快于其他方法
+ * LongAccumulator比LongAdder略微快一点
+ * LongAccumulator速度最快
  */
 @Slf4j
 public class CountSpeedDemo {
-    private final static int THREAD_COUNT = 16;
-    private final static int LOOP_COUNT = 1_000_000;
+    private final static int THREAD_COUNT = 8;
+    private final static int LOOP_COUNT = 80_000_000;
 
     int number = 0;
 
@@ -48,7 +50,7 @@ public class CountSpeedDemo {
             throw new RuntimeException(e);
         }
         long end = System.currentTimeMillis();
-        log.info("result: {}, spend {}ms of plusPlus()", number, (end - start));
+        log.info("{}ms \tof plusPlus，\tresult: {}", (end - start), number);
     }
 
     AtomicInteger atomicInteger = new AtomicInteger(0);
@@ -76,7 +78,7 @@ public class CountSpeedDemo {
             throw new RuntimeException(e);
         }
         long end = System.currentTimeMillis();
-        log.info("result: {}, spend {}ms of atomicIntegerIncrease()", atomicInteger.get(), (end - start));
+        log.info("{}ms \tof atomicInteger，\tresult: {}", (end - start), atomicInteger.get());
     }
 
     AtomicLong atomicLong = new AtomicLong(0);
@@ -104,7 +106,7 @@ public class CountSpeedDemo {
             throw new RuntimeException(e);
         }
         long end = System.currentTimeMillis();
-        log.info("result: {}, spend {}ms of atomicLongIncrease()", atomicLong.get(), (end - start));
+        log.info("{}ms \tof atomicLong，\tresult: {}", (end - start), atomicLong.get());
     }
 
     LongAdder longAdder = new LongAdder();
@@ -132,7 +134,7 @@ public class CountSpeedDemo {
             throw new RuntimeException(e);
         }
         long end = System.currentTimeMillis();
-        log.info("result: {}, spend {}ms of longAdd()", longAdder.sum(), (end - start));
+        log.info("{}ms \tof longAdd，\tresult: {}", (end - start), longAdder.sum());
     }
 
     LongAccumulator longAccumulator = new LongAccumulator((x, y) -> x + y, 0);
@@ -160,13 +162,13 @@ public class CountSpeedDemo {
             throw new RuntimeException(e);
         }
         long end = System.currentTimeMillis();
-        log.info("result: {}, spend {}ms of longAccumulate()", longAccumulator.get(), (end - start));
+        log.info("{}ms \tof longAccumulate，\tresult: {}", (end - start), longAccumulator.get());
     }
 
     public void calculate() {
-        plusPlus();
-        atomicIntegerIncrease();
-        atomicLongIncrease();
+        //plusPlus();
+        //atomicIntegerIncrease();
+        //atomicLongIncrease();
         longAdd();
         longAccumulate();
     }
