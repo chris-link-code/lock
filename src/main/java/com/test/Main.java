@@ -43,10 +43,7 @@ public class Main {
 
         //new CountSpeedDemo().calculate();
 
-        //11341ms
         //new LoopDemo().forTest();
-
-        //11392ms
         //new LoopDemo().whileTest();
 
         log.info("end main()");
