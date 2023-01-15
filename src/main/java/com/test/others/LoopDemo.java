@@ -8,11 +8,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author chris
  * @create 2023/1/15
  *
- * 测试for和while速度对比
+ * 测试for和while速度对比;
  *
  * 结论：
- * 当循环次数固定时，强烈推荐使用for，编译器会优化，速度快很多
- * 当循环次数不固定时，for和while速度基本无差别，建议使用while
+ * 当循环次数固定时，强烈推荐使用for，编译器会优化，速度快很多;
+ * 当循环次数不固定时，for和while速度基本无差别，建议使用while;
  */
 @Slf4j
 public class LoopDemo {
