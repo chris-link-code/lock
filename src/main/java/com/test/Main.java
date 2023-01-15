@@ -1,6 +1,5 @@
 package com.test;
 
-import com.test.thread.CountSpeedDemo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -32,7 +31,7 @@ public class Main {
 
         //new GetCat().getAge();
 
-        // new GetCatFeture().getAge();
+        //new GetCatFuture().getAge();
 
         //new CompletableFutureDemo().futureTest();
 
@@ -42,7 +41,13 @@ public class Main {
 
         //new CASDemo().atomicTest();
 
-        new CountSpeedDemo().calculate();
+        //new CountSpeedDemo().calculate();
+
+        //11341ms
+        //new LoopDemo().forTest();
+
+        //11392ms
+        //new LoopDemo().whileTest();
 
         log.info("end main()");
     }
