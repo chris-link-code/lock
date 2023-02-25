@@ -48,7 +48,8 @@ public class Main {
 
         //new ThreadLocalDemo().test(processors);
 
-        new ReferenceDemo().strongReference();
+        //new ReferenceDemo().strongReference();
+        new ReferenceDemo().softReference();
 
         log.info("end main()");
     }

@@ -3,6 +3,8 @@ package com.test.jvm;
 import com.test.bean.Self;
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.ref.SoftReference;
+
 /**
  * @author chris
  * @create 2023/2/25
@@ -20,5 +22,18 @@ public class ReferenceDemo {
         // 手动开启gc，一般情况不要使用
         System.gc();
         log.info("gc after: {}", self);
+    }
+
+    /**
+     * 软引用
+     * 当系统内存充足时，gc不会回收
+     * 当系统内存不充足时，gc会回收
+     */
+    public void softReference() {
+        SoftReference<Self> self = new SoftReference<>(new Self());
+        log.info("soft reference: {}", self.get());
+        // 手动开启gc，一般情况不要使用
+        System.gc();
+        log.info("gc after: {}", self.get());
     }
 }
