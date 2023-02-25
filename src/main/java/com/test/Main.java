@@ -1,6 +1,6 @@
 package com.test;
 
-import com.test.thread.ThreadLocalDemo;
+import com.test.jvm.ReferenceDemo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -46,7 +46,9 @@ public class Main {
         //new LoopDemo().forTest();
         //new LoopDemo().whileTest();
 
-        new ThreadLocalDemo().test(processors);
+        //new ThreadLocalDemo().test(processors);
+
+        new ReferenceDemo().test();
 
         log.info("end main()");
     }
