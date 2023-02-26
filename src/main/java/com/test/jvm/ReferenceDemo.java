@@ -33,14 +33,7 @@ public class ReferenceDemo {
     public void softReference() {
         SoftReference<Self> self = new SoftReference<>(new Self());
         log.info("soft reference: {}", self.get());
-        try {
-            // 占用20MB
-            byte[] bytes = new byte[20 * 1024 * 1024];
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        } finally {
-            log.info("gc after: {}", self.get());
-        }
+
         // 启动参数设为 -Xms1m -Xmx10m，最大内存限定为10MB
         // 手动开启gc，一般情况不要使用
         System.gc();
@@ -49,7 +42,16 @@ public class ReferenceDemo {
         } catch (InterruptedException e) {
             log.error(e.getMessage(), e);
         } finally {
-            log.info("gc after: {}", self.get());
+            log.info("gc after memory free: {}", self.get());
+        }
+
+        try {
+            // 占用20MB
+            byte[] bytes = new byte[20 * 1024 * 1024];
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            log.info("gc after memory full: {}", self.get());
         }
     }
 }
