@@ -4,6 +4,7 @@ import com.test.bean.Self;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -24,6 +25,17 @@ public class ReferenceDemo {
         System.gc();
         log.info("gc after: {}", self);
     }
+
+    /**
+     * 使用场景：
+     * 假如有一个应用需要读取大量的本地图片；
+     * 如果每次读取图片都从硬盘读取则会严重影响性能；
+     * 如果一次性全部加载到内存中又可能造成内存溢出；
+     * 此时使用软引用可以解决这个问题；
+     * 设计思路是：用一个HashMap来保存图片的路径和相应图片对象关联的软引用之间的映射关系；
+     * 在内存不足时，JM会自动回收这些缓存图片对象所占用的空间，从而有效地避免了OOM的问题。
+     * Map<String, SofReference<Bitmap>> imageCache = new HashMap<String, SoftReference<Bitmap>>();
+     */
 
     /**
      * 软引用;
@@ -54,4 +66,34 @@ public class ReferenceDemo {
             log.info("gc after memory full: {}", self.get());
         }
     }
+
+    /**
+     * 弱引用；
+     * 无论系统内存是否够用；
+     * 只要gc，就一定会被回收；
+     */
+    public void weakReference() {
+        WeakReference<Self> self = new WeakReference<>(new Self());
+        log.info("gc before: {}", self);
+        // 手动开启gc，一般情况不要使用
+        System.gc();
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            log.info("gc after memory free: {}", self.get());
+        }
+    }
+
+    /**
+     * 1 虚引用必须和引用队列 (ReferenceQueue)联合使用
+     * 虛引用需要java.lang.ref.PhantomReference类水实现,顾名思义，就是形同虚设，与其他几种引用都不同，虚引用并不会决定对象的生命周期。如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收，它不能单独使用也不能通过它访问对象，虚引用必须和引用队列 (ReferenceQueue)联合使用。
+     * 2 PhantomReference的get方法总是返回null
+     * 虛引用的主要作用是跟踪对象被垃圾回收的状态。仅仅是提供了一和确保对象被 finalize以后，做某些事情的通知机制。
+     * PhantomReference的get方法总是返回null，因此无法访问对应的引用对象。
+     * 3处理监控通知使用
+     * 换句话说，设置虛引用关联对象的唯一目的，就是在这个对象被收集器回收的时候收到一个系统通知或者后续添加进一步的处理，用
+     * 来实现比finalize机制更灵活的回收操作
+     */
 }

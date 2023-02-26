@@ -48,8 +48,10 @@ public class Main {
 
         //new ThreadLocalDemo().test(processors);
 
+        // 强、软、虚 四大引用
         //new ReferenceDemo().strongReference();
-        new ReferenceDemo().softReference();
+        //new ReferenceDemo().softReference();
+        new ReferenceDemo().weakReference();
 
         log.info("end main()");
     }
