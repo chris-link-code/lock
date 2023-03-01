@@ -51,7 +51,8 @@ public class Main {
         // 强、软、虚 四大引用
         //new ReferenceDemo().strongReference();
         //new ReferenceDemo().softReference();
-        new ReferenceDemo().weakReference();
+        //new ReferenceDemo().weakReference();
+        new ReferenceDemo().phantomReference();
 
         log.info("end main()");
     }

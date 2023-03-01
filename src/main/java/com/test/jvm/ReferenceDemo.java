@@ -3,8 +3,12 @@ package com.test.jvm;
 import com.test.bean.Self;
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.ref.PhantomReference;
+import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -92,15 +96,34 @@ public class ReferenceDemo {
      * 与其他几种引用都不同，虚引用并不会决定对象的生命周期。
      * 如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收，
      * 它不能单独使用也不能通过它访问对象，虚引用必须和引用队列 (ReferenceQueue)联合使用。
-     *
+     * <p>
      * 2 PhantomReference的get方法总是返回null
      * 虛引用的主要作用是跟踪对象被垃圾回收的状态。
      * 仅仅是提供了一和确保对象被finalize以后，做某些事情的通知机制。
      * PhantomReference的get方法总是返回null，因此无法访问对应的引用对象。
-     *
+     * <p>
      * 3 处理监控通知使用
      * 换句话说，设置虛引用关联对象的唯一目的，
      * 就是在这个对象被收集器回收的时候收到一个系统通知或者后续添加进一步的处理，
      * 用来实现比finalize机制更灵活的回收操作
      */
+    public void phantomReference() {
+        Self self = new Self();
+        ReferenceQueue<Self> queue = new ReferenceQueue<>();
+        PhantomReference<Self> reference = new PhantomReference<>(self, queue);
+        log.info("reference: {}", reference.get());
+
+        List<byte[]> list = new ArrayList<>();
+        new Thread(() -> {
+            while (true) {
+                // 不断存入1MB
+                list.add(new byte[1 * 1024 * 1024]);
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
+        }).start();
+    }
 }
