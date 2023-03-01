@@ -3,10 +3,7 @@ package com.test.jvm;
 import com.test.bean.Self;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.ref.PhantomReference;
-import java.lang.ref.ReferenceQueue;
-import java.lang.ref.SoftReference;
-import java.lang.ref.WeakReference;
+import java.lang.ref.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -111,7 +108,7 @@ public class ReferenceDemo {
         Self self = new Self();
         ReferenceQueue<Self> queue = new ReferenceQueue<>();
         PhantomReference<Self> reference = new PhantomReference<>(self, queue);
-        log.info("reference: {}", reference.get());
+        log.info("reference.get(): {}", reference.get());
 
         List<byte[]> list = new ArrayList<>();
         new Thread(() -> {
@@ -123,7 +120,18 @@ public class ReferenceDemo {
                 } catch (InterruptedException e) {
                     log.error(e.getMessage(), e);
                 }
+                log.info("list add 1MB,reference.get(): {}", reference.get());
             }
-        }).start();
+        }, "t_1").start();
+
+        new Thread(() -> {
+            while (true) {
+                Reference<? extends Self> poll = queue.poll();
+                if (poll != null) {
+                    log.info("有虚引用回收被加入了队列");
+                    break;
+                }
+            }
+        }, "t_2").start();
     }
 }
