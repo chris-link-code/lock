@@ -7,7 +7,6 @@ package com.test.bean;
  * ThreadLocalDemo资源类
  */
 public class Data {
-    // 记得初始化，否则可能会返回null，看官方API文档
     public ThreadLocal<Integer> number = ThreadLocal.withInitial(() -> 0);
 
     public void add() {

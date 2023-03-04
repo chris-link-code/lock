@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 public class ThreadLocalDemo {
     /**
      * 使用ThreadLocal记住如下三步：
-     * 一定要初始化，ThreadLocal.withInitial(() -> 初始值);
+     * 一定要初始化，ThreadLocal.withInitial(() -> 初始值)，否则会报空指针异常;
      * 建议把ThreadLocal修饰为static;
      * 使用完一定要记得手动remove
      */
