@@ -12,6 +12,12 @@ import java.util.concurrent.Executors;
  */
 @Slf4j
 public class ThreadLocalDemo {
+    /**
+     * 使用ThreadLocal记住如下三步：
+     * ThreadLocal.withInitial(() -> 初始值);
+     * 建议把ThreadLocal修饰为static;
+     * 使用完记得手动remove
+     */
     public void test(int processors) {
         Data data = new Data();
         ExecutorService threadPool = Executors.newFixedThreadPool(processors);
@@ -23,7 +29,7 @@ public class ThreadLocalDemo {
                     Integer after = data.number.get();
                     log.info("{}\tbefore: {}\tafter: {}", Thread.currentThread().getName(), before, after);
                 } finally {
-                    // TODO 此处一定要在 finally 使用 remove()，否则线程不安全，详情见阿里规范
+                    // 此处一定要在 finally 使用 remove()，否则线程不安全，详情见阿里规范
                     data.number.remove();
                 }
             });
