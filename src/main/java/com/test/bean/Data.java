@@ -7,7 +7,7 @@ package com.test.bean;
  * ThreadLocalDemo资源类
  */
 public class Data {
-    public ThreadLocal<Integer> number = ThreadLocal.withInitial(() -> 0);
+    public static ThreadLocal<Integer> number = ThreadLocal.withInitial(() -> 0);
 
     public void add() {
         number.set(number.get() + 1);

@@ -13,10 +13,15 @@ import java.util.concurrent.Executors;
 @Slf4j
 public class ThreadLocalDemo {
     /**
+     * ThreadLocal能实现了线程的数据隔离，不在于它自己本身，
+     * 而在于Thread的ThreadLocalMap;
+     * 所以，ThreadLocal可以只初始化一次，只分配一块存储空间就足以了，
+     * 没必要作为成员变量多次被初始化。
+     *
      * 使用ThreadLocal记住如下三步：
-     * 一定要初始化，ThreadLocal.withInitial(() -> 初始值)，否则会报空指针异常;
-     * 建议把ThreadLocal修饰为static;
-     * 使用完一定要记得手动remove
+     * 1.一定要初始化，ThreadLocal.withInitial(() -> 初始值)，否则会报空指针异常;
+     * 2.建议把ThreadLocal修饰为static;
+     * 3.使用完一定要记得手动remove;
      */
     public void test(int processors) {
         Data data = new Data();
