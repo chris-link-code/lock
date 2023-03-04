@@ -14,9 +14,9 @@ import java.util.concurrent.Executors;
 public class ThreadLocalDemo {
     /**
      * 使用ThreadLocal记住如下三步：
-     * ThreadLocal.withInitial(() -> 初始值);
+     * 一定要初始化，ThreadLocal.withInitial(() -> 初始值);
      * 建议把ThreadLocal修饰为static;
-     * 使用完记得手动remove
+     * 使用完一定要记得手动remove
      */
     public void test(int processors) {
         Data data = new Data();
