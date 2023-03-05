@@ -38,6 +38,7 @@ public class ObjectDemo {
      */
 
     /**
+     * 参考周志明《深入理解JVM虚拟机》2.3.2 对象的内存布局
      * 使用openjdk jol工具查看对象内存布局
      * <p>
      * OFFSET：偏移地址，单位为字节;
@@ -45,6 +46,7 @@ public class ObjectDemo {
      * TYPE：Class中定义的类型;
      * DESCRIPTION：类型描述，object header表示对象头，object alignment表示对齐填充;
      * VALUE：对应内存中存储的值;
+     * 原文链接：https://blog.csdn.net/uuqaz/article/details/123340729
      */
     public void test() {
         Cat cat = new Cat("tom");
