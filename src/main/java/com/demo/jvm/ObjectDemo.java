@@ -4,6 +4,7 @@ import com.demo.bean.Cat;
 import com.demo.bean.User;
 import lombok.extern.slf4j.Slf4j;
 import org.openjdk.jol.info.ClassLayout;
+import org.openjdk.jol.vm.VM;
 
 import java.util.concurrent.TimeUnit;
 
@@ -49,6 +50,8 @@ public class ObjectDemo {
      * 原文链接：https://blog.csdn.net/uuqaz/article/details/123340729
      */
     public void test() {
+        log.info("VM current details:\r\n{}", VM.current().details());
+
         Cat cat = new Cat("tom");
         User user = new User(3, "Jerry", cat);
         log.info("user memory space:\r\n{}", ClassLayout.parseInstance(user).toPrintable());
