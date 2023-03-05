@@ -53,7 +53,7 @@ public class ObjectDemo {
         log.info("VM current details:\r\n{}", VM.current().details());
 
         Cat cat = new Cat("tom");
-        User user = new User(3, "Jerry", cat);
+        User user = new User(3, "Jerry", true, cat);
         log.info("user memory space:\r\n{}", ClassLayout.parseInstance(user).toPrintable());
 
         Object object = new Object();
