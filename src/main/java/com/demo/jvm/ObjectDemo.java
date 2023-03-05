@@ -5,6 +5,8 @@ import com.demo.bean.User;
 import lombok.extern.slf4j.Slf4j;
 import org.openjdk.jol.info.ClassLayout;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author chris
  * @create 2023/3/5
@@ -52,17 +54,32 @@ public class ObjectDemo {
         Object object = new Object();
         log.info("object memory space:\r\n{}", ClassLayout.parseInstance(object).toPrintable());
 
+        // 此时的锁是轻量级锁(thin lock)
         synchronized (object) {
             log.info("synchronized object memory space:\r\n{}", ClassLayout.parseInstance(object).toPrintable());
         }
 
-        Thread thread = new Thread(() -> {
+        // 当线程t_1和t_2争抢锁时，锁会升级为重量级锁(fat lock)
+        new Thread(() -> {
             synchronized (object) {
-                log.info("thread synchronized object memory space:\r\n{}", ClassLayout.parseInstance(object).toPrintable());
+                try {
+                    TimeUnit.MILLISECONDS.sleep(100);
+                } catch (InterruptedException e) {
+                    log.error(e.getMessage(), e);
+                }
+                log.info("thread 1 synchronized object memory space:\r\n{}", ClassLayout.parseInstance(object).toPrintable());
             }
-        }, "t_1");
+        }, "t_1").start();
 
-        thread.start();
-        log.info("thread start object memory space:\r\n{}", ClassLayout.parseInstance(object).toPrintable());
+        new Thread(() -> {
+            synchronized (object) {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(100);
+                } catch (InterruptedException e) {
+                    log.error(e.getMessage(), e);
+                }
+                log.info("thread 2 synchronized object memory space:\r\n{}", ClassLayout.parseInstance(object).toPrintable());
+            }
+        }, "t_2").start();
     }
 }
