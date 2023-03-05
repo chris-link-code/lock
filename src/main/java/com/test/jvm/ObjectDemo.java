@@ -37,6 +37,12 @@ public class ObjectDemo {
 
     /**
      * 使用openjdk jol工具查看对象内存布局
+     * <p>
+     * OFFSET：偏移地址，单位为字节;
+     * SIZE：占用内存大小，单位为字节;
+     * TYPE：Class中定义的类型;
+     * DESCRIPTION：类型描述，object header表示对象头，object alignment表示对齐填充;
+     * VALUE：对应内存中存储的值;
      */
     public void test() {
         Object object = new Object();
