@@ -1,5 +1,7 @@
 package com.test.jvm;
 
+import com.test.bean.Cat;
+import com.test.bean.User;
 import lombok.extern.slf4j.Slf4j;
 import org.openjdk.jol.info.ClassLayout;
 
@@ -39,5 +41,9 @@ public class ObjectDemo {
     public void test() {
         Object object = new Object();
         log.info("object memory space:\r\n{}", ClassLayout.parseInstance(object).toPrintable());
+
+        Cat cat = new Cat("tom");
+        User user = new User(3, "Jerry", cat);
+        log.info("user memory space:\r\n{}", ClassLayout.parseInstance(user).toPrintable());
     }
 }
