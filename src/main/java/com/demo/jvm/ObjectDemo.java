@@ -59,6 +59,12 @@ public class ObjectDemo {
         Object object = new Object();
         log.info("object memory space:\r\n{}", ClassLayout.parseInstance(object).toPrintable());
 
+        // hashCode是在调用hashCode()方法后才会产生，存放在对象头里
+        int hashCode = object.hashCode();
+        log.info("object hashcode: {}", hashCode);
+        log.info("object hashcode hex: {}", Integer.toHexString(hashCode));
+        log.info("object memory space:\r\n{}", ClassLayout.parseInstance(object).toPrintable());
+
         // 此时的锁是轻量级锁(thin lock)
         synchronized (object) {
             log.info("synchronized object memory space:\r\n{}", ClassLayout.parseInstance(object).toPrintable());
