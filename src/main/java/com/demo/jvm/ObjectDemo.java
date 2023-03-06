@@ -104,6 +104,8 @@ public class ObjectDemo {
      * 若该线程再次访问同一个synchronized方法时，
      * 该线程只需去对象头的Mark Word中去判断一下是否有偏向锁指向本身的ID，
      * 无需再进入Monitor去竞争对象了。
+     * <p>
+     * 偏向锁的操作没有到达操作系统层面，不涉及用户态与内核态的切换，所以开销很小。
      */
     public void test() {
         log.info("VM current details:\r\n{}", VM.current().details());
