@@ -1,6 +1,6 @@
 package com.demo;
 
-import com.demo.jvm.ObjectDemo;
+import com.demo.others.TryDemo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -54,7 +54,9 @@ public class Main {
         //new ReferenceDemo().weakReference();
         //new ReferenceDemo().phantomReference();
 
-        new ObjectDemo().test();
+        //new ObjectDemo().test();
+
+        new TryDemo().test();
 
         log.info("end main()");
     }
