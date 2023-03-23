@@ -18,27 +18,23 @@ public class LockDemo {
     Map<Integer, String> map = new HashMap<>();
 
     public void reentrantLockRead(Integer key) {
-        boolean hasLock = reentrantLock.tryLock();
-        if (!hasLock) {
-            log.warn("ReentrantLockRead lock failed");
-            return;
-        }
+        reentrantLock.lock();
         try {
+            log.info("{} start read", Thread.currentThread().getName());
             log.info("{} read {}", key, map.get(key));
+            log.info("{} end read", Thread.currentThread().getName());
         } finally {
             reentrantLock.unlock();
         }
     }
 
     public void reentrantLockWrite(Integer key) {
-        boolean hasLock = reentrantLock.tryLock();
-        if (!hasLock) {
-            log.warn("ReentrantLockWrite lock failed");
-            return;
-        }
+        reentrantLock.lock();
         try {
+            log.info("{} start write", Thread.currentThread().getName());
             map.put(key, String.valueOf(key));
             log.info("{} write {}", key, key);
+            log.info("{} end write", Thread.currentThread().getName());
         } finally {
             reentrantLock.unlock();
         }
@@ -46,26 +42,19 @@ public class LockDemo {
 
     /**
      * ReentrantLock测试
+     * 从本例可以看出，ReentrantLock锁不仅读写互斥，读读也互斥，效率低下
      */
     public void reentrantLockTest() {
         // 创建多个写线程
         for (int i = 0; i < LOOP_SIZE; i++) {
             int t = i;
-            new Thread(() -> {
-                log.info("{} start write", t);
-                reentrantLockWrite(t);
-                log.info("{} end write", t);
-            }, String.valueOf(i)).start();
+            new Thread(() -> reentrantLockWrite(t), String.valueOf(i)).start();
         }
 
         // 创建多个读线程
         for (int i = 0; i < LOOP_SIZE; i++) {
             int t = i;
-            new Thread(() -> {
-                log.info("{} start read", t);
-                reentrantLockRead(t);
-                log.info("{} end read", t);
-            }, String.valueOf(i)).start();
+            new Thread(() -> reentrantLockRead(t), String.valueOf(i)).start();
         }
     }
 }
