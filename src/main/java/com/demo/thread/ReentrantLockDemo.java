@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @create 2023/3/23
  */
 @Slf4j
-public class LockDemo {
+public class ReentrantLockDemo {
     private static final int LOOP_SIZE = 8;
     Lock reentrantLock = new ReentrantLock();
     Map<Integer, String> map = new HashMap<>();

@@ -18,28 +18,30 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 @Slf4j
 public class ReadWriteLockDemo {
-    private volatile Map<Integer, String> map = new HashMap<>(1 << 4);
-    private ReadWriteLock lock = new ReentrantReadWriteLock();
+    private final Map<Integer, String> map = new HashMap<>(1 << 4);
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
+    private static final int LOOP_SIZE = 8;
 
+    /**
+     * 从本例可以看出，ReentrantReadWriteLock锁读写互斥，写写互斥，但读读不互斥，效率较高
+     */
     public void readWriteLockTest() {
         // write
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < LOOP_SIZE; i++) {
             final int number = i;
-            new Thread(() -> {
-                write(number, String.valueOf(number));
-            }, String.valueOf(i)).start();
+            new Thread(() -> write(number, String.valueOf(number)), String.valueOf(i)).start();
         }
 
         //read
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < LOOP_SIZE; i++) {
             final int number = i;
-            new Thread(() -> {
-                read(number);
-            }, String.valueOf(i)).start();
+            new Thread(() -> read(number), String.valueOf(i)).start();
         }
     }
 
-    /**write*/
+    /**
+     * write
+     */
     private void write(int key, String value) {
         lock.writeLock().lock();
         log.info("{} is writing", Thread.currentThread().getName());
@@ -53,16 +55,13 @@ public class ReadWriteLockDemo {
         lock.writeLock().unlock();
     }
 
-    /**read*/
+    /**
+     * read
+     */
     private void read(int key) {
         lock.readLock().lock();
         log.info("{} is reading", Thread.currentThread().getName());
-        map.get(key);
-        try {
-            TimeUnit.MILLISECONDS.sleep(100);
-        } catch (InterruptedException e) {
-            log.error(e.getMessage(), e);
-        }
+        log.info("{} value is {}", key, map.get(key));
         log.info(Thread.currentThread().getName() + " is read done");
         lock.readLock().unlock();
     }

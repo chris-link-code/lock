@@ -1,6 +1,6 @@
 package com.demo;
 
-import com.demo.thread.LockDemo;
+import com.demo.thread.ReadWriteLockDemo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -11,7 +11,7 @@ public class Main {
         //log.info("java.vm.name: " + System.getProperty("java.vm.name"));
         //log.info("os.arch: " + System.getProperty("os.arch"));
 
-        int processors = Runtime.getRuntime().availableProcessors();
+        //int processors = Runtime.getRuntime().availableProcessors();
 
         //log.info("processors: " + processors);
 
@@ -23,7 +23,7 @@ public class Main {
 
         //new SemaphoreDemo().semaphoreTest();
 
-        //new ReadWriteLockDemo().readWriteLockTest();
+        new ReadWriteLockDemo().readWriteLockTest();
 
         //new FutureDemo().futureTest();
 
@@ -58,7 +58,7 @@ public class Main {
 
         //new TryDemo().test();
 
-        new LockDemo().reentrantLockTest();
+        //new ReentrantLockDemo().reentrantLockTest();
 
         log.info("end main()");
     }
