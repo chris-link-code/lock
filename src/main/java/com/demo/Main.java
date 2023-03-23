@@ -1,6 +1,6 @@
 package com.demo;
 
-import com.demo.others.TryDemo;
+import com.demo.thread.LockDemo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -56,7 +56,9 @@ public class Main {
 
         //new ObjectDemo().test();
 
-        new TryDemo().test();
+        //new TryDemo().test();
+
+        new LockDemo().reentrantLockTest();
 
         log.info("end main()");
     }
