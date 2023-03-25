@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -44,15 +43,13 @@ public class ReadWriteLockDemo {
      */
     private void write(int key, String value) {
         lock.writeLock().lock();
-        log.info("{} is writing", Thread.currentThread().getName());
-        map.put(key, value);
         try {
-            TimeUnit.MILLISECONDS.sleep(100);
-        } catch (InterruptedException e) {
-            log.error(e.getMessage(), e);
+            log.info("{} is writing", Thread.currentThread().getName());
+            map.put(key, value);
+            log.info(Thread.currentThread().getName() + " is write done");
+        } finally {
+            lock.writeLock().unlock();
         }
-        log.info(Thread.currentThread().getName() + " is write done");
-        lock.writeLock().unlock();
     }
 
     /**
@@ -60,10 +57,13 @@ public class ReadWriteLockDemo {
      */
     private void read(int key) {
         lock.readLock().lock();
-        log.info("{} is reading", Thread.currentThread().getName());
-        log.info("{} value is {}", key, map.get(key));
-        log.info(Thread.currentThread().getName() + " is read done");
-        lock.readLock().unlock();
+        try {
+            log.info("{} is reading", Thread.currentThread().getName());
+            log.info("{} value is {}", key, map.get(key));
+            log.info(Thread.currentThread().getName() + " read done");
+        } finally {
+            lock.readLock().unlock();
+        }
     }
 
 }
