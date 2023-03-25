@@ -18,13 +18,13 @@ public class StampedLockDemo {
 
     public void write() {
         long stamp = stampedLock.writeLock();
-        log.info("{} thread start write", Thread.currentThread().getName());
+        log.info("{} start write", Thread.currentThread().getName());
         try {
             number = number + 1;
         } finally {
             stampedLock.unlockWrite(stamp);
         }
-        log.info("{} thread write end", Thread.currentThread().getName());
+        log.info("{} write end", Thread.currentThread().getName());
     }
 
     /**
@@ -58,7 +58,8 @@ public class StampedLockDemo {
     public void tryOptimisticRead() {
         long stamp = stampedLock.tryOptimisticRead();
         //故意间隔4秒钟，很乐观认为读取中没有其它线程修改过number值，具体靠判断
-        log.info("开始乐观锁读,stampedLock.validate(stamp): {} (true无修改，false有修改)",
+        log.info("{} start tryOptimisticRead, stampedLock.validate(stamp): {} (true无修改，false有修改)",
+                Thread.currentThread().getName(),
                 stampedLock.validate(stamp));
         for (int i = 0; i < 4; i++) {
             try {
@@ -67,7 +68,7 @@ public class StampedLockDemo {
                 log.error(e.getMessage(), e);
             }
             log.info("{} is reading... stampedLock.validate(stamp): {} (true无修改，false有修改)",
-                    Thread.currentThread().getName(), i, stampedLock.validate(stamp));
+                    Thread.currentThread().getName(), stampedLock.validate(stamp));
         }
         if (!stampedLock.validate(stamp)) {
             log.info("有人修改过 ---- 有写操作");
@@ -79,7 +80,7 @@ public class StampedLockDemo {
                 stampedLock.unlockRead(stamp);
             }
         }
-        log.info("{} thread finally number: {}",
+        log.info("{} finally number: {}",
                 Thread.currentThread().getName(), number);
     }
 
@@ -104,7 +105,7 @@ public class StampedLockDemo {
         log.info(Thread.currentThread().getName()+"\t"+"number:" +number);
         */
 
-        new Thread(() -> tryOptimisticRead(), "readThread").start();
+        new Thread(() -> tryOptimisticRead(), "read_thread").start();
 
         try {
             //暂停2秒钟线程,读过程可以写介入，演示
@@ -115,6 +116,6 @@ public class StampedLockDemo {
             log.error(e.getMessage(), e);
         }
 
-        new Thread(() -> write(), "writeThread").start();
+        new Thread(() -> write(), "write_thread").start();
     }
 }

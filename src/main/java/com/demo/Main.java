@@ -60,6 +60,6 @@ public class Main {
         //new ReadWriteLockDemo().readWriteLockTest();
         new StampedLockDemo().test();
 
-        log.info("end main()");
+        //log.info("end main()");
     }
 }
