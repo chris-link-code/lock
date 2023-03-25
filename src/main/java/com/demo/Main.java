@@ -23,8 +23,6 @@ public class Main {
 
         //new SemaphoreDemo().semaphoreTest();
 
-        new ReadWriteLockDemo().readWriteLockTest();
-
         //new FutureDemo().futureTest();
 
         //log.info(Convert.zConvert("PAYPALISHIRING", 3));
@@ -59,6 +57,7 @@ public class Main {
         //new TryDemo().test();
 
         //new ReentrantLockDemo().reentrantLockTest();
+        new ReadWriteLockDemo().readWriteLockTest();
 
         log.info("end main()");
     }
