@@ -1,6 +1,6 @@
 package com.demo;
 
-import com.demo.thread.ReadWriteLockDemo;
+import com.demo.thread.StampedLockDemo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -57,7 +57,8 @@ public class Main {
         //new TryDemo().test();
 
         //new ReentrantLockDemo().reentrantLockTest();
-        new ReadWriteLockDemo().readWriteLockTest();
+        //new ReadWriteLockDemo().readWriteLockTest();
+        new StampedLockDemo().test();
 
         log.info("end main()");
     }
