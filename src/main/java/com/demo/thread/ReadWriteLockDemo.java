@@ -17,7 +17,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 @Slf4j
 public class ReadWriteLockDemo {
-    private final Map<Integer, String> map = new HashMap<>(1 << 4);
+    private final Map<Integer, String> map = new HashMap<>();
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private static final int LOOP_SIZE = 8;
 
