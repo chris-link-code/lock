@@ -55,49 +55,55 @@ public class StampedLockDemo {
     public void tryOptimisticRead() {
         long stamp = stampedLock.tryOptimisticRead();
         try {
+            TimeUnit.MILLISECONDS.sleep(50);
             for (int i = 0; i < LOOP_SIZE; i++) {
-                if (!stampedLock.validate(stamp)) {
+                if (stampedLock.validate(stamp)) {
                     log.info("{} {} time tryOptimisticRead, number: {}, stamp: {}, stampedLock.validate(stamp): {} (true无修改，false有修改)",
                             Thread.currentThread().getName(), i, number, stamp, stampedLock.validate(stamp));
-                    TimeUnit.MILLISECONDS.sleep(50);
+                } else {
+                    log.info("有人修改过，有写操作，从乐观读升级为悲观读，并重新获取数据");
+                    stamp = stampedLock.readLock();
+                    try {
+                        log.info("{} {} time tryOptimisticRead, number: {}, stamp: {}, stampedLock.validate(stamp): {} (true无修改，false有修改)",
+                                Thread.currentThread().getName(), i, number, stamp, stampedLock.validate(stamp));
+                    } finally {
+                        stampedLock.unlockRead(stamp);
+                    }
                 }
             }
         } catch (InterruptedException e) {
             log.error(e.getMessage(), e);
-        } finally {
-            log.info("{} tryOptimisticRead end, number: {}, stamp: {}",
-                    Thread.currentThread().getName(), number, stamp);
-            stampedLock.unlockRead(stamp);
         }
+        log.info("{} tryOptimisticRead end, number: {}, stamp: {}",
+                Thread.currentThread().getName(), number, stamp);
+
 
         /*
-        //先获得乐观读锁的戳
         long stamp = stampedLock.tryOptimisticRead();
+        int result = number;
         //故意间隔4秒钟，很乐观认为读取中没有其它线程修改过number值，具体靠判断
-        log.info("{} start tryOptimisticRead, stampedLock.validate(stamp): {} (true无修改，false有修改)",
-                Thread.currentThread().getName(),
-                stampedLock.validate(stamp));
+        System.out.println("4秒前stampedLock.validate方法值(true无修改，false有修改)" + "\t" + stampedLock.validate(stamp));
         for (int i = 0; i < 4; i++) {
             try {
-                TimeUnit.MILLISECONDS.sleep(100);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
-                log.error(e.getMessage(), e);
+                e.printStackTrace();
             }
-            log.info("{} is reading... stampedLock.validate(stamp): {} (true无修改，false有修改)",
-                    Thread.currentThread().getName(), stampedLock.validate(stamp));
+            System.out.println(Thread.currentThread().getName() + "\t" + "正在读取... " + i + " 秒" +
+                    "后stampedLock.validate方法值(true无修改，false有修改)" + "\t" + stampedLock.validate(stamp));
         }
         if (!stampedLock.validate(stamp)) {
-            log.info("有人修改过 ---- 有写操作");
+            System.out.println("有人修改过------有写操作");
             stamp = stampedLock.readLock();
             try {
-                log.info("从 乐观读 升级为 悲观读");
-                log.info("重新悲观读后 number: {}", number);
+                System.out.println("从乐观读 升级为 悲观读");
+                result = number;
+                System.out.println("重新悲观读后result：" + result);
             } finally {
                 stampedLock.unlockRead(stamp);
             }
         }
-        log.info("{} finally number: {}",
-                Thread.currentThread().getName(), number);
+        System.out.println(Thread.currentThread().getName() + "\t" + " finally value: " + result);
         */
     }
 
