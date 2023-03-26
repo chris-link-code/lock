@@ -54,25 +54,25 @@ public class StampedLockDemo {
 
     public void tryOptimisticRead() {
         long stamp = stampedLock.tryOptimisticRead();
-        try {
-            TimeUnit.MILLISECONDS.sleep(50);
-            for (int i = 0; i < LOOP_SIZE; i++) {
-                if (stampedLock.validate(stamp)) {
-                    log.info("{} {} time tryOptimisticRead, number: {}, stamp: {}, validate(stamp): {} (true无修改，false有修改)",
-                            Thread.currentThread().getName(), i, number, stamp, stampedLock.validate(stamp));
-                } else {
-                    log.info("有人修改过，有写操作，从乐观读升级为悲观读，并重新获取数据");
-                    stamp = stampedLock.readLock();
-                    try {
-                        log.info("{} {} time tryOptimisticRead, number: {}, stamp: {}, validate(stamp): {} (true无修改，false有修改)",
-                                Thread.currentThread().getName(), i, number, stamp, stampedLock.validate(stamp));
-                    } finally {
-                        stampedLock.unlockRead(stamp);
-                    }
-                }
-            }
+
+        /*try {
+            TimeUnit.MILLISECONDS.sleep(100);
         } catch (InterruptedException e) {
             log.error(e.getMessage(), e);
+        }*/
+
+        if (stampedLock.validate(stamp)) {
+            log.info("{} tryOptimisticRead, number: {}, stamp: {}, validate(stamp): {} (true无修改，false有修改)",
+                    Thread.currentThread().getName(), number, stamp, stampedLock.validate(stamp));
+        } else {
+            log.info("有人修改过，有写操作，从乐观读升级为悲观读，并重新获取数据");
+            stamp = stampedLock.readLock();
+            try {
+                log.info("{} tryOptimisticRead, number: {}, stamp: {}, validate(stamp): {} (true无修改，false有修改)",
+                        Thread.currentThread().getName(), number, stamp, stampedLock.validate(stamp));
+            } finally {
+                stampedLock.unlockRead(stamp);
+            }
         }
         log.info("{} tryOptimisticRead end, number: {}, stamp: {}",
                 Thread.currentThread().getName(), number, stamp);
@@ -111,7 +111,9 @@ public class StampedLockDemo {
     public void test() {
         //new Thread(() -> read(), "read_thread").start();
         //new Thread(() -> tryOptimisticRead(), "optimistic_read_thread").start();
+        for (int i = 0; i < LOOP_SIZE; i++) {
+            new Thread(() -> tryOptimisticRead(), "optimistic_read_thread").start();
+        }
         new Thread(() -> write(), "write_thread").start();
-        new Thread(() -> tryOptimisticRead(), "optimistic_read_thread").start();
     }
 }
