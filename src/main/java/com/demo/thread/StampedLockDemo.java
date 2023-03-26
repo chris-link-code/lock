@@ -58,13 +58,13 @@ public class StampedLockDemo {
             TimeUnit.MILLISECONDS.sleep(50);
             for (int i = 0; i < LOOP_SIZE; i++) {
                 if (stampedLock.validate(stamp)) {
-                    log.info("{} {} time tryOptimisticRead, number: {}, stamp: {}, stampedLock.validate(stamp): {} (true无修改，false有修改)",
+                    log.info("{} {} time tryOptimisticRead, number: {}, stamp: {}, validate(stamp): {} (true无修改，false有修改)",
                             Thread.currentThread().getName(), i, number, stamp, stampedLock.validate(stamp));
                 } else {
                     log.info("有人修改过，有写操作，从乐观读升级为悲观读，并重新获取数据");
                     stamp = stampedLock.readLock();
                     try {
-                        log.info("{} {} time tryOptimisticRead, number: {}, stamp: {}, stampedLock.validate(stamp): {} (true无修改，false有修改)",
+                        log.info("{} {} time tryOptimisticRead, number: {}, stamp: {}, validate(stamp): {} (true无修改，false有修改)",
                                 Thread.currentThread().getName(), i, number, stamp, stampedLock.validate(stamp));
                     } finally {
                         stampedLock.unlockRead(stamp);
@@ -76,9 +76,10 @@ public class StampedLockDemo {
         }
         log.info("{} tryOptimisticRead end, number: {}, stamp: {}",
                 Thread.currentThread().getName(), number, stamp);
+    }
 
-
-        /*
+    //乐观读，读的过程中也允许获取写锁介入
+    /*public void tryOptimisticRead() {
         long stamp = stampedLock.tryOptimisticRead();
         int result = number;
         //故意间隔4秒钟，很乐观认为读取中没有其它线程修改过number值，具体靠判断
@@ -104,13 +105,13 @@ public class StampedLockDemo {
             }
         }
         System.out.println(Thread.currentThread().getName() + "\t" + " finally value: " + result);
-        */
-    }
+    }*/
 
 
     public void test() {
         //new Thread(() -> read(), "read_thread").start();
-        new Thread(() -> tryOptimisticRead(), "optimistic_read_thread").start();
+        //new Thread(() -> tryOptimisticRead(), "optimistic_read_thread").start();
         new Thread(() -> write(), "write_thread").start();
+        new Thread(() -> tryOptimisticRead(), "optimistic_read_thread").start();
     }
 }
