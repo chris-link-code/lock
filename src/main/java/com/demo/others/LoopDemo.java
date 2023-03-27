@@ -2,6 +2,8 @@ package com.demo.others;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -44,5 +46,12 @@ public class LoopDemo {
         }
         long end = System.currentTimeMillis();
         log.info("while time: {}ms", end - start);
+    }
+
+    public void listTest(){
+        List<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
     }
 }
