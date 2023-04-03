@@ -1,6 +1,6 @@
 package com.demo;
 
-import com.demo.extend.ImplDemo;
+import com.demo.util.Tool;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -60,8 +60,16 @@ public class Main {
         //new ReadWriteLockDemo().readWriteLockTest();
         //new StampedLockDemo().test();
 
-        new ImplDemo().test();
+        //new ImplDemo().test();
 
         //log.info("end main()");
+
+        long totalMemory = Runtime.getRuntime().totalMemory();
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        long freeMemory = Runtime.getRuntime().freeMemory();
+        log.info("total memory: {}", Tool.fileSizeTransfer(totalMemory));
+        log.info("max memory: {}", Tool.fileSizeTransfer(maxMemory));
+        log.info("free memory: {}", Tool.fileSizeTransfer(freeMemory));
+
     }
 }

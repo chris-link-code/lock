@@ -20,6 +20,7 @@
         <logback.version>1.4.6</logback.version>
         <junit-jupiter-api.version>5.9.2</junit-jupiter-api.version>
         <jol.version>0.17</jol.version>
+        <hutool.version>5.8.16</hutool.version>
     </properties>
 
     <!--IDEA 2021.2.2 最高只支持 maven 3.6.3-->
@@ -59,6 +60,11 @@
             <groupId>org.openjdk.jol</groupId>
             <artifactId>jol-core</artifactId>
             <version>${jol.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
 
