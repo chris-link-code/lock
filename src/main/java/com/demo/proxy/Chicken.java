@@ -11,12 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Chicken implements IStar {
     @Override
-    public String sing(String song) {
-        log.info("鸡哥演唱歌曲{}", song);
-        return "哎呦，你干嘛";
-    }
-
-    public void dance(String dance) {
-        log.info("鸡哥跳舞{}", dance);
+    public void sing(String song) {
+        log.info("演唱歌曲{}", song);
     }
 }

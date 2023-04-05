@@ -76,7 +76,6 @@ public class Main {
          * 通过ChickenStaticProxy增强sing方法
          */
         IStar iStar = new Chicken();
-        String sing = new ChickenStaticProxy(iStar).sing("鸡你太美");
-        log.info(sing);
+        new ChickenStaticProxy(iStar).sing("只因你太美");
     }
 }
