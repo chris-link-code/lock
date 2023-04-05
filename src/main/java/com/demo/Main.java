@@ -1,9 +1,12 @@
 package com.demo;
 
 import com.demo.proxy.Chicken;
-import com.demo.proxy.ChickenStaticProxy;
+import com.demo.proxy.ChickenDynamicProxy;
 import com.demo.proxy.IStar;
 import lombok.extern.slf4j.Slf4j;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
 
 @Slf4j
 public class Main {
@@ -72,10 +75,15 @@ public class Main {
 
         /*
          * 静态代理
-         * 不改变Chicken的sing方法
-         * 通过ChickenStaticProxy增强sing方法
+
          */
-        IStar iStar = new Chicken();
-        new ChickenStaticProxy(iStar).sing("只因你太美");
+        //IStar iStar = new Chicken();
+        //new ChickenStaticProxy(iStar).sing("只因你太美");
+
+        InvocationHandler handler = new ChickenDynamicProxy(new Chicken());
+        IStar iStar = (IStar) Proxy.newProxyInstance(IStar.class.getClassLoader(),
+                new Class[]{IStar.class},
+                handler);
+        iStar.sing("只因你太美");
     }
 }
