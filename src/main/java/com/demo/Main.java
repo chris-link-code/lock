@@ -1,5 +1,6 @@
 package com.demo;
 
+import com.demo.util.Tool;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -63,15 +64,9 @@ public class Main {
 
         //log.info("end main()");
 
+        Tool.logMemory();
         // 1GB
         byte[] space = new byte[1 << 30];
-
-        long totalMemory = Runtime.getRuntime().totalMemory();
-        long maxMemory = Runtime.getRuntime().maxMemory();
-        long freeMemory = Runtime.getRuntime().freeMemory();
-        log.info("total memory: {}", totalMemory / (1 << 20));
-        log.info("max memory: {}", maxMemory / (1 << 20));
-        log.info("free memory: {}", freeMemory / (1 << 20));
-
+        Tool.logMemory();
     }
 }

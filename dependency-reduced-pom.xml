@@ -55,6 +55,7 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven-shade-plugin.version>3.4.1</maven-shade-plugin.version>
     <slf4j-api.version>2.0.5</slf4j-api.version>
+    <hutool.version>5.8.16</hutool.version>
     <lombok.version>1.18.26</lombok.version>
     <junit-jupiter-api.version>5.9.2</junit-jupiter-api.version>
     <maven.compiler.target>17</maven.compiler.target>
