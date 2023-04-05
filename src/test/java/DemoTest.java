@@ -129,4 +129,17 @@ public class DemoTest {
         // 输出测试结果
         System.out.println(tab.toString());
     }
+
+    @Test
+    public void intTest() {
+        int k = 1 << 10;
+        int m = 1 << 20;
+        int g = 1 << 30;
+        int t = 1 << 40;
+        log.info("1 << 10 : {}", k);
+        log.info("1 << 20 : {}", m);
+        log.info("1 << 30 : {}", g);
+        log.info("1 << 40 : {}", t);
+        log.info("Integer.MAX_VALUE: {}", Integer.MAX_VALUE);
+    }
 }

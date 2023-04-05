@@ -64,9 +64,10 @@ public class Main {
 
         //log.info("end main()");
 
-        Tool.logMemory();
+        Tool.logUseMemory();
         // 1GB
         byte[] space = new byte[1 << 30];
-        Tool.logMemory();
+        log.info("new 1GB byte[]");
+        Tool.logUseMemory();
     }
 }

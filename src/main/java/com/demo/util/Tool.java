@@ -8,7 +8,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class Tool {
-
+    private static final Long K = 1L << 10;
+    private static final Long M = 1L << 20;
+    private static final Long G = 1L << 30;
+    private static final Long T = 1L << 40;
 
     /**
      * 文件大小转换
@@ -17,32 +20,36 @@ public class Tool {
      * @param size 字节
      */
     public static String fileSizeTransfer(Long size) {
-        Long KB = 1L << 10;
-        Long MB = 1L << 20;
-        Long GB = 1L << 30;
-        Long TB = 1L << 40;
-        if (size > TB) {
-            return (size / TB) + "TB";
+        if (size > T) {
+            return (size / T) + "TB";
         }
-        if (size > GB) {
-            return (size / GB) + "GB";
+        if (size > G) {
+            return (size / G) + "GB";
         }
-        if (size > MB) {
-            return (size / MB) + "MB";
+        if (size > M) {
+            return (size / M) + "MB";
         }
-        if (size > KB) {
-            return (size / KB) + "KB";
+        if (size > K) {
+            return (size / K) + "KB";
         }
         return size + "B";
     }
 
-    public static void logMemory() {
-        int mb = 1 << 20;
-        long totalMemory = Runtime.getRuntime().totalMemory();
+    public static void logAllMemory() {
         long maxMemory = Runtime.getRuntime().maxMemory();
+        long totalMemory = Runtime.getRuntime().totalMemory();
         long freeMemory = Runtime.getRuntime().freeMemory();
-        log.info("total memory: {}", totalMemory / mb);
-        log.info("max memory: {}", maxMemory / mb);
-        log.info("free memory: {}", freeMemory / mb);
+        long useMemory = totalMemory - freeMemory;
+        log.info("max memory: {}MB", maxMemory / M);
+        log.info("total memory: {}MB", totalMemory / M);
+        log.info("free memory: {}MB", freeMemory / M);
+        log.info("use memory: {}MB", useMemory / M);
+    }
+
+    public static void logUseMemory() {
+        long totalMemory = Runtime.getRuntime().totalMemory();
+        long freeMemory = Runtime.getRuntime().freeMemory();
+        long useMemory = totalMemory - freeMemory;
+        log.info("use memory: {}MB", useMemory / M);
     }
 }
