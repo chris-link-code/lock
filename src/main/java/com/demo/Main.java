@@ -75,11 +75,13 @@ public class Main {
 
         /*
          * 静态代理
-
          */
         //IStar iStar = new Chicken();
         //new ChickenStaticProxy(iStar).sing("只因你太美");
 
+        /*
+         * 动态代理
+         */
         InvocationHandler handler = new ChickenDynamicProxy(new Chicken());
         IStar iStar = (IStar) Proxy.newProxyInstance(IStar.class.getClassLoader(),
                 new Class[]{IStar.class},
