@@ -34,6 +34,7 @@ public class ChickenDynamicProxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         log.info("[动态代理]我是练习时长两年半的个人练习生");
+        //TODO 代理多个方法
         Object invoke = method.invoke(iStar, args);
         log.info("[动态代理]我还喜欢打篮球");
         return invoke;
