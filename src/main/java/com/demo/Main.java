@@ -1,6 +1,8 @@
 package com.demo;
 
-import com.demo.util.Tool;
+import com.demo.proxy.Chicken;
+import com.demo.proxy.ChickenStaticProxy;
+import com.demo.proxy.IStar;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -62,12 +64,19 @@ public class Main {
 
         //new ImplDemo().test();
 
-        //log.info("end main()");
+        //Tool.logUseMemory();
+        //1GB
+        //byte[] space = new byte[1 << 30];
+        //log.info("new 1GB byte[]");
+        //Tool.logUseMemory();
 
-        Tool.logUseMemory();
-        // 1GB
-        byte[] space = new byte[1 << 30];
-        log.info("new 1GB byte[]");
-        Tool.logUseMemory();
+        /*
+         * 静态代理
+         * 不改变Chicken的sing方法
+         * 通过ChickenStaticProxy增强sing方法
+         */
+        IStar iStar = new Chicken();
+        String sing = new ChickenStaticProxy(iStar).sing("鸡你太美");
+        log.info(sing);
     }
 }
