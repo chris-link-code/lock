@@ -27,7 +27,7 @@ import java.lang.reflect.Method;
 public class ChickenDynamicProxy implements InvocationHandler {
     IStar iStar;
 
-    public ChickenDynamicProxy(IStar iStar) {
+    public  ChickenDynamicProxy(IStar iStar) {
         this.iStar = iStar;
     }
 
