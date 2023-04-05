@@ -132,14 +132,15 @@ public class DemoTest {
 
     @Test
     public void intTest() {
-        int k = 1 << 10;
-        int m = 1 << 20;
-        int g = 1 << 30;
-        int t = 1 << 40;
+        Long k = 1L << 10;
+        Long m = 1L << 20;
+        Long g = 1L << 30;
+        Long t = 1L << 40;
         log.info("1 << 10 : {}", k);
         log.info("1 << 20 : {}", m);
         log.info("1 << 30 : {}", g);
         log.info("1 << 40 : {}", t);
-        log.info("Integer.MAX_VALUE: {}", Integer.MAX_VALUE);
+        log.info("1 << 31 : {}", 1L << 31);
+        log.info("Int__MAX: {}", Integer.MAX_VALUE);
     }
 }
