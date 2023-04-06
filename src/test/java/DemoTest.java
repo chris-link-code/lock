@@ -143,4 +143,12 @@ public class DemoTest {
         log.info("1 << 31 : {}", 1L << 31);
         log.info("Int__MAX: {}", Integer.MAX_VALUE);
     }
+
+    @Test
+    public void equalTest() {
+        Integer i = 1;
+        Integer o = 0;
+        log.info("1 == 0: {}", i == o);
+        log.info("1 equals 0: {}", i.equals(o));
+    }
 }
