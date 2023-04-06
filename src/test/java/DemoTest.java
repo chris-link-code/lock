@@ -151,4 +151,19 @@ public class DemoTest {
         log.info("1 == 0: {}", i == o);
         log.info("1 equals 0: {}", i.equals(o));
     }
+
+    @Test
+    public void instanceofTest() {
+        List<Object> list = new ArrayList<>();
+        list.add("s");
+        list.add(1);
+        list.forEach(i -> {
+            if (i instanceof String) {
+                log.info("{} is string", i);
+            }
+            if (i instanceof Integer) {
+                log.info("{} is int", i);
+            }
+        });
+    }
 }
