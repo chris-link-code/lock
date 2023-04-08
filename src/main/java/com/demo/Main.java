@@ -90,5 +90,6 @@ public class Main {
                 new Class[]{IStar.class},
                 handler);
         iStar.sing("只因你太美");
+        iStar.rap("rap");
     }
 }

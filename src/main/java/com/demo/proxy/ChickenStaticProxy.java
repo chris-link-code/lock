@@ -55,4 +55,9 @@ public class ChickenStaticProxy implements IStar {
         iStar.sing(song);
         log.info("[静态代理]我还喜欢打篮球");
     }
+
+    @Override
+    public void rap(String rap) {
+        log.info("我喜欢{}", rap);
+    }
 }

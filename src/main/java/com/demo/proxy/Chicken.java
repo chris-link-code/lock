@@ -14,4 +14,9 @@ public class Chicken implements IStar {
     public void sing(String song) {
         log.info("演唱歌曲{}", song);
     }
+
+    @Override
+    public void rap(String rap) {
+        log.info("说{}", rap);
+    }
 }

@@ -27,16 +27,21 @@ import java.lang.reflect.Method;
 public class ChickenDynamicProxy implements InvocationHandler {
     IStar iStar;
 
-    public  ChickenDynamicProxy(IStar iStar) {
+    public ChickenDynamicProxy(IStar iStar) {
         this.iStar = iStar;
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         log.info("[动态代理]我是练习时长两年半的个人练习生");
-        //TODO 代理多个方法
         Object invoke = method.invoke(iStar, args);
-        log.info("[动态代理]我还喜欢打篮球");
+        // 代理实现多个方法
+        if ("sing".equals(method.getName())) {
+            log.info("[动态代理]我喜欢唱");
+        }
+        if ("rap".equals(method.getName())) {
+            log.info("[动态代理]我喜欢rap");
+        }
         return invoke;
     }
 }
