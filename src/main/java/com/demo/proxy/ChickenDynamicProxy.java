@@ -34,6 +34,11 @@ public class ChickenDynamicProxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         log.info("[动态代理]我是练习时长两年半的个人练习生");
+        if (args != null && args.length > 0) {
+            for (int i = 0; i < args.length; i++) {
+                log.info("args[{}]: {}", i, args[i].toString());
+            }
+        }
         Object invoke = method.invoke(iStar, args);
         // 代理实现多个方法
         if ("sing".equals(method.getName())) {
