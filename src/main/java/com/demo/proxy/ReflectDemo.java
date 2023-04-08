@@ -15,6 +15,9 @@ public class ReflectDemo {
          * 1. Class.forName("包名.类名");
          * 2. 类名.class;
          * 3. 对象.getClass();
+         * 1最为常用
+         * 2一般当作参数进行传递
+         * 3当已经有了对象时才用
          */
         Class clazz1 = Class.forName("com.demo.bean.User");
         Class clazz2 = User.class;
