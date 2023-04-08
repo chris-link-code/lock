@@ -33,7 +33,7 @@ public class Main {
 
         //new FutureDemo().futureTest();
 
-        //log.info(Convert.zConvert("PAYPALISHIRING", 3));
+        //log.info(Convert.zConvert("PLAY_MUSIC", 3));
 
         //new GetCat().getAge();
 
@@ -76,15 +76,11 @@ public class Main {
         //log.info("new 1GB byte[]");
         //Tool.logUseMemory();
 
-        /*
-         * 静态代理
-         */
+        //静态代理
         //IStar iStar = new Chicken();
         //new ChickenStaticProxy(iStar).sing("只因你太美");
 
-        /*
-         * 动态代理
-         */
+        //动态代理
         InvocationHandler handler = new ChickenDynamicProxy(new Chicken());
         IStar iStar = (IStar) Proxy.newProxyInstance(IStar.class.getClassLoader(),
                 new Class[]{IStar.class},
