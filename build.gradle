@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.demo'
+version = '1.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testImplementation 'ch.qos.logback:logback-classic:1.4.6'
+
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+    implementation 'ch.qos.logback:logback-core:1.4.6'
+    implementation 'cn.hutool:hutool-all:5.8.16'
+
+    compileOnly 'org.openjdk.jol:jol-core:0.17'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.demo.Main'
+    }
+}
