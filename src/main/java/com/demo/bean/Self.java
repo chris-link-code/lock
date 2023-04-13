@@ -12,8 +12,8 @@ public class Self {
      *
      * @throws Throwable
      */
-    @Override
+    /*@Override
     protected void finalize() throws Throwable {
         System.out.println("invoke finalize()");
-    }
+    }*/
 }

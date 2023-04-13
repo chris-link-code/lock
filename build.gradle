@@ -5,6 +5,10 @@ plugins {
 group = 'org.demo'
 version = '1.0'
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -23,6 +27,9 @@ dependencies {
 
     compileOnly 'org.openjdk.jol:jol-core:0.17'
     compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    testCompileOnly 'org.projectlombok:lombok:1.18.26'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
 }
 
 test {
@@ -31,10 +38,6 @@ test {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'org.demo.Main'
+        attributes 'Main-Class': 'com.demo.Main'
     }
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
 }
