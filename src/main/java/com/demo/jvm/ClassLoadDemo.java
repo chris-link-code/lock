@@ -17,5 +17,6 @@ public class ClassLoadDemo {
 
     public void test() {
         Shark shark = new Shark();
+        log.info("结论：创建对象时，会先加载父类");
     }
 }
