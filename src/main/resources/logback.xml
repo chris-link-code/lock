@@ -5,14 +5,13 @@
     <property name="log_dir" value="./log"/>
     <property name="maxFileSize" value="50MB"/>
     <property name="maxHistory" value="180"/>
+    <property name="pattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} | %highlight%-5level| %boldYellow%thread | %boldGreen(%logger{20}) [%method,%line] | %msg%n"/>
 
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>
-                %date{yyyy-MM-dd HH:mm:ss.SSS} | %highlight%-5level| %boldYellow%thread | %boldGreen(%logger{20}) [%method,%line] | %msg%n
-            </pattern>
+            <pattern>${pattern}</pattern>
         </encoder>
     </appender>
 
@@ -30,9 +29,7 @@
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>
-                %date{yyyy-MM-dd HH:mm:ss} | %highlight(%-5level) | %boldYellow(%thread) | %boldGreen(%logger) | %msg%n
-            </pattern>
+            <pattern>${pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!-- 只打印info日志 -->
@@ -56,9 +53,7 @@
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>
-                %date{yyyy-MM-dd HH:mm:ss} | %highlight(%-5level) | %boldYellow(%thread) | %boldGreen(%logger) | %msg%n
-            </pattern>
+            <pattern>${pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!-- 只打印错误日志 -->
@@ -82,9 +77,7 @@
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>
-                %date{yyyy-MM-dd HH:mm:ss} | %highlight(%-5level) | %boldYellow(%thread) | %boldGreen(%logger) | %msg%n
-            </pattern>
+            <pattern>${pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!-- 只打印DEBUG日志 -->

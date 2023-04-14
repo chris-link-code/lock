@@ -1,6 +1,6 @@
 package com.demo;
 
-import com.demo.proxy.ReflectDemo;
+import com.demo.jvm.ClassLoadDemo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -83,6 +83,9 @@ public class Main {
         iStar.sing("只因你太美");
         iStar.rap("rap");*/
 
-        new ReflectDemo().test();
+        //new ReflectDemo().test();
+
+        //类加载测试
+        new ClassLoadDemo().test();
     }
 }
