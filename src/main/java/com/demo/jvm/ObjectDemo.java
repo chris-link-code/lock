@@ -14,8 +14,13 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class ObjectDemo {
+    int i;
+
     public void test() {
         log.info("VM current details:\r\n{}", VM.current().details());
+
+        // 未初始化的int值为零，但如果是包装类型Integer则为null
+        log.info("i: {}", i);
 
         Cat cat = new Cat("tom");
         User user = new User(3, "Jerry", true, cat);
