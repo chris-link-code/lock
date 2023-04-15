@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class Fish {
+    public static int i;
+    public static final int L = 1;
+
     static {
         log.info("Fish 类被加载");
     }

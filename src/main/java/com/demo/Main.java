@@ -86,6 +86,10 @@ public class Main {
         //new ReflectDemo().test();
 
         //类加载测试
-        new ClassLoadDemo().test();
+        //new ClassLoadDemo().newChild();
+        //new ClassLoadDemo().staticInt();
+        //new ClassLoadDemo().staticFinalInt();
+        //new ClassLoadDemo().reflect();
+        new ClassLoadDemo().extendStatic();
     }
 }
