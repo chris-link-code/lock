@@ -5,7 +5,7 @@
     <property name="log_dir" value="./log"/>
     <property name="maxFileSize" value="50MB"/>
     <property name="maxHistory" value="180"/>
-    <property name="pattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} | %highlight%-5level| %boldYellow%thread | %boldGreen(%logger{20}) [%method,%line] | %msg%n"/>
+    <property name="pattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} | %highlight(%-5level)| %boldYellow(%thread) | %boldGreen(%logger{20}) [%method,%line] | %msg%n"/>
 
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
