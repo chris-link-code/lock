@@ -52,4 +52,16 @@ public class ClassLoadDemo {
         log.info("数组: {}", sharks.toString());
         log.info("结论：调用数组时，不会加载父类和子类");
     }
+
+    public void classLoader() {
+        ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+        ClassLoader platformClassLoader = ClassLoader.getPlatformClassLoader();
+        log.info("ClassLoader.getSystemClassLoader: {}", systemClassLoader);
+        log.info("ClassLoader.getPlatformClassLoader: {}", platformClassLoader);
+
+        ClassLoader systemParent = systemClassLoader.getParent();
+        ClassLoader platformParent = platformClassLoader.getParent();
+        log.info("systemParent: {}", systemParent);
+        log.info("platformParent: {}", platformParent);
+    }
 }

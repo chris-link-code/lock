@@ -1,5 +1,6 @@
 package com.demo;
 
+import com.demo.jvm.ClassLoadDemo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -7,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class Main {
-    public static void main(String[] args) throws Throwable {
+    public static void main(String[] args) {
         // 原文链接：https://blog.csdn.net/HaHa_Sir/article/details/84984234
         log.info("java.version: " + System.getProperty("java.version"));
         //log.info("java.vm.name: " + System.getProperty("java.vm.name"));
@@ -92,5 +93,6 @@ public class Main {
         //new ClassLoadDemo().extendStatic();
         //new ClassLoadDemo().extendFinal();
         //new ClassLoadDemo().array();
+        new ClassLoadDemo().classLoader();
     }
 }
