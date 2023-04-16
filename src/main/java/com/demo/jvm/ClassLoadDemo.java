@@ -39,7 +39,17 @@ public class ClassLoadDemo {
 
     public void extendStatic() {
         log.info("通过子类调用父类的静态变量: {}", Shark.i);
-        log.info("结论：调用static final int时，不会加载类");
+        log.info("结论：通过子类调用父类的静态变量时，不会加载子类");
     }
 
+    public void extendFinal() {
+        log.info("通过子类调用父类的常量: {}", Shark.L);
+        log.info("结论：通过子类调用父类的常量时，不会加载父类和子类");
+    }
+
+    public void array() {
+        Shark[] sharks = new Shark[3];
+        log.info("数组: {}", sharks.toString());
+        log.info("结论：调用数组时，不会加载父类和子类");
+    }
 }

@@ -1,6 +1,5 @@
 package com.demo;
 
-import com.demo.jvm.ClassLoadDemo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -90,6 +89,8 @@ public class Main {
         //new ClassLoadDemo().staticInt();
         //new ClassLoadDemo().staticFinalInt();
         //new ClassLoadDemo().reflect();
-        new ClassLoadDemo().extendStatic();
+        //new ClassLoadDemo().extendStatic();
+        //new ClassLoadDemo().extendFinal();
+        //new ClassLoadDemo().array();
     }
 }
