@@ -63,5 +63,12 @@ public class ClassLoadDemo {
         ClassLoader platformParent = platformClassLoader.getParent();
         log.info("systemParent: {}", systemParent);
         log.info("platformParent: {}", platformParent);
+
+        // 获得系统类可加载的路径
+        String classPath = System.getProperty("java.class.path");
+        String[] split = classPath.split(":");
+        for (String path : split) {
+            log.info("java.class.path: {}", path);
+        }
     }
 }
