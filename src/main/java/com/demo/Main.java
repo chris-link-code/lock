@@ -1,6 +1,6 @@
 package com.demo;
 
-import com.demo.jvm.ClassLoadDemo;
+import com.demo.jvm.ReflectDemo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Throwable {
         // 原文链接：https://blog.csdn.net/HaHa_Sir/article/details/84984234
         log.info("java.version: " + System.getProperty("java.version"));
         //log.info("java.vm.name: " + System.getProperty("java.vm.name"));
@@ -83,7 +83,7 @@ public class Main {
         iStar.sing("只因你太美");
         iStar.rap("rap");*/
 
-        //new ReflectDemo().test();
+        //new ReflectDemo().getClazz();
 
         //类加载测试
         //new ClassLoadDemo().newChild();
@@ -93,6 +93,8 @@ public class Main {
         //new ClassLoadDemo().extendStatic();
         //new ClassLoadDemo().extendFinal();
         //new ClassLoadDemo().array();
-        new ClassLoadDemo().classLoader();
+        //new ClassLoadDemo().classLoader();
+
+        new ReflectDemo().test();
     }
 }

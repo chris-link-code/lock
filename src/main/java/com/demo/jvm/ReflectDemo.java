@@ -1,15 +1,23 @@
-package com.demo.proxy;
+package com.demo.jvm;
 
 import com.demo.bean.User;
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * @author chris
- * @create 2023/4/8
+ * @create 2023/4/22
+ * <p>
+ * 反射
  */
 @Slf4j
 public class ReflectDemo {
-    public void test() throws ClassNotFoundException {
+    /**
+     * 通过反射获取class对象
+     * @throws ClassNotFoundException
+     */
+    public void getClazz() throws ClassNotFoundException {
         /*
          * 获取class的三种方式
          * 1. Class.forName("包名.类名");
@@ -31,5 +39,15 @@ public class ReflectDemo {
 
         log.info("clazz1 == clazz2: {}", clazz1 == clazz2);
         log.info("clazz2 == clazz3: {}", clazz2 == clazz3);
+    }
+
+    public void test() throws ClassNotFoundException,
+            NoSuchMethodException,
+            InvocationTargetException,
+            InstantiationException,
+            IllegalAccessException {
+        Class clazz = Class.forName("com.demo.bean.User");
+        User user = (User) clazz.getDeclaredConstructor().newInstance();
+        log.info(user.toString());
     }
 }
