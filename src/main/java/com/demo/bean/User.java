@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class User {
-    private int age;
+    private Integer age;
     private String name;
-    private boolean gender;
+    private Boolean gender;
     private Cat cat;
 }
