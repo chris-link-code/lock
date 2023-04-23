@@ -4,6 +4,7 @@ import com.demo.bean.User;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * @author chris
@@ -13,8 +14,11 @@ import java.lang.reflect.InvocationTargetException;
  */
 @Slf4j
 public class ReflectDemo {
+    static final Integer LOOP_SIZE = 1 << 30;
+
     /**
      * 通过反射获取class对象
+     *
      * @throws ClassNotFoundException
      */
     public void getClazz() throws ClassNotFoundException {
@@ -49,5 +53,51 @@ public class ReflectDemo {
         Class clazz = Class.forName("com.demo.bean.User");
         User user = (User) clazz.getDeclaredConstructor().newInstance();
         log.info(user.toString());
+    }
+
+
+    /**
+     * 测试反射性能
+     * 结论：反射非常影响性能，不宜大量使用
+     */
+    public void performance() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        newObject();
+        reflect();
+        reflectAccessible();
+    }
+
+    public void newObject() {
+        long start = System.currentTimeMillis();
+        User user = new User(99, "Hank", true, null);
+        for (int i = 0; i < LOOP_SIZE; i++) {
+            user.getName();
+        }
+        long end = System.currentTimeMillis();
+        log.info("new objet spend {}ms", end - start);
+    }
+
+    public void reflect() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        long start = System.currentTimeMillis();
+        User user = new User(99, "Hank", true, null);
+        Class clazz = user.getClass();
+        Method getName = clazz.getDeclaredMethod("getName");
+        for (int i = 0; i < LOOP_SIZE; i++) {
+            getName.invoke(user);
+        }
+        long end = System.currentTimeMillis();
+        log.info("reflect spend {}ms", end - start);
+    }
+
+    public void reflectAccessible() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        long start = System.currentTimeMillis();
+        User user = new User(99, "Hank", true, null);
+        Class clazz = user.getClass();
+        Method getName = clazz.getDeclaredMethod("getName");
+        getName.setAccessible(true);
+        for (int i = 0; i < LOOP_SIZE; i++) {
+            getName.invoke(user);
+        }
+        long end = System.currentTimeMillis();
+        log.info("reflect accessible spend {}ms", end - start);
     }
 }
