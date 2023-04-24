@@ -4,6 +4,7 @@ import com.demo.bean.Self;
 import com.demo.bean.User;
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -123,6 +124,19 @@ public class ReflectDemo {
                     log.info("actual type: {}", actualType);
                 }
             }
+        }
+    }
+
+    /**
+     * 通过反射获得注解
+     *
+     * @throws ClassNotFoundException
+     */
+    public void annotation() throws ClassNotFoundException {
+        Class clazz = Class.forName("com.demo.bean.Ball");
+        Annotation[] annotations = clazz.getAnnotations();
+        for (Annotation annotation : annotations) {
+            log.info("annotation: {}", annotation);
         }
     }
 }

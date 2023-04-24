@@ -97,6 +97,7 @@ public class Main {
 
         //new ReflectDemo().test();
         //new ReflectDemo().performance();
-        new ReflectDemo().generic();
+        //new ReflectDemo().generic();
+        new ReflectDemo().annotation();
     }
 }
