@@ -1,10 +1,15 @@
 package com.demo.jvm;
 
+import com.demo.bean.Self;
 import com.demo.bean.User;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author chris
@@ -99,5 +104,25 @@ public class ReflectDemo {
         }
         long end = System.currentTimeMillis();
         log.info("reflect accessible spend {}ms", end - start);
+    }
+
+    /**
+     * 利用反射获取泛型
+     */
+    public void generic() throws NoSuchMethodException {
+        Class<Self> clazz = Self.class;
+        Method getCat = clazz.getMethod("getCat", Map.class, List.class);
+        // 获取方法参数泛型
+        Type[] parameterTypes = getCat.getGenericParameterTypes();
+        for (Type type : parameterTypes) {
+            log.info("type: {}", type);
+            if (type instanceof ParameterizedType) {
+                // 获取内部泛型
+                Type[] actualTypes = ((ParameterizedType) type).getActualTypeArguments();
+                for (Type actualType : actualTypes) {
+                    log.info("actual type: {}", actualType);
+                }
+            }
+        }
     }
 }

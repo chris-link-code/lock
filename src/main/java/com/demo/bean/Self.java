@@ -1,5 +1,8 @@
 package com.demo.bean;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author chris
  * @create 2023/2/25
@@ -16,4 +19,12 @@ public class Self {
     protected void finalize() throws Throwable {
         System.out.println("invoke finalize()");
     }*/
+
+    /**
+     * 测试利用反射获取泛型
+     * @param map
+     * @param list
+     */
+    public void getCat(Map<String, Cat> map, List<Cat> list) {
+    }
 }

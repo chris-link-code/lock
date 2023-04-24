@@ -96,6 +96,7 @@ public class Main {
         //new ClassLoadDemo().classLoader();
 
         //new ReflectDemo().test();
-        new ReflectDemo().performance();
+        //new ReflectDemo().performance();
+        new ReflectDemo().generic();
     }
 }
