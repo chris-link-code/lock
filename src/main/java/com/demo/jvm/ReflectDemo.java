@@ -1,14 +1,13 @@
 package com.demo.jvm;
 
+import com.demo.bean.Table;
 import com.demo.bean.Self;
+import com.demo.bean.TableField;
 import com.demo.bean.User;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.List;
 import java.util.Map;
 
@@ -132,11 +131,24 @@ public class ReflectDemo {
      *
      * @throws ClassNotFoundException
      */
-    public void annotation() throws ClassNotFoundException {
+    public void annotation() throws ClassNotFoundException, NoSuchFieldException {
         Class clazz = Class.forName("com.demo.bean.Ball");
+
+        // 通过反射获得注解
         Annotation[] annotations = clazz.getAnnotations();
         for (Annotation annotation : annotations) {
             log.info("annotation: {}", annotation);
         }
+
+        // 通过反射获得注解里的值
+        Table play = (Table) clazz.getAnnotation(Table.class);
+        String value = play.value();
+        log.info("play value: {}", value);
+
+        Field name = clazz.getDeclaredField("name");
+        TableField annotation = name.getAnnotation(TableField.class);
+        log.info("column: {}", annotation.column());
+        log.info("type: {}", annotation.type());
+        log.info("length: {}", annotation.length());
     }
 }

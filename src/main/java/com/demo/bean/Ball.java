@@ -4,13 +4,13 @@ package com.demo.bean;
  * @author chris
  * @create 2023/4/24
  */
-@Play("db_ball")
+@Table("db_ball")
 public class Ball {
-    @Field(column = "db_size", type = "int", length = 16)
+    @TableField(column = "db_size", type = "int", length = 16)
     private Integer size;
-    @Field(column = "db_weight", type = "int", length = 16)
+    @TableField(column = "db_weight", type = "int", length = 16)
     private Integer weight;
-    @Field(column = "db_name", type = "varchar", length = 32)
+    @TableField(column = "db_name", type = "varchar", length = 32)
     private String name;
 
     public Ball() {
