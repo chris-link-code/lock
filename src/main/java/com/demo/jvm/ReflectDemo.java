@@ -143,7 +143,7 @@ public class ReflectDemo {
         // 通过反射获得注解里的值
         Table play = (Table) clazz.getAnnotation(Table.class);
         String value = play.value();
-        log.info("play value: {}", value);
+        log.info("table value: {}", value);
 
         Field name = clazz.getDeclaredField("name");
         TableField annotation = name.getAnnotation(TableField.class);
