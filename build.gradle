@@ -20,10 +20,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
 
     implementation 'org.slf4j:slf4j-api:2.0.7'
-    implementation 'ch.qos.logback:logback-core:1.4.6'
-    implementation 'ch.qos.logback:logback-classic:1.4.6'
+    implementation 'ch.qos.logback:logback-core:1.4.7'
+    implementation 'ch.qos.logback:logback-classic:1.4.7'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
-    implementation 'cn.hutool:hutool-all:5.8.16'
+    implementation 'cn.hutool:hutool-all:5.8.18'
     implementation 'org.openjdk.jol:jol-core:0.17'
     implementation 'org.projectlombok:lombok:1.18.26'
 
