@@ -12,7 +12,7 @@ import java.util.concurrent.CountDownLatch;
  */
 @Slf4j
 public class SelfLockDemo {
-    static final int LOOP_SIZE = 1_000;
+    static final int LOOP_SIZE = 1_000_000;
     static int number = 0;
     static SelfLock lock = new SelfLock();
 
@@ -20,14 +20,24 @@ public class SelfLockDemo {
         CountDownLatch count = new CountDownLatch(2);
         Thread thread1 = new Thread(() -> {
             for (int i = 0; i < LOOP_SIZE; i++) {
-                number++;
+                lock.lock();
+                try {
+                    number++;
+                } finally {
+                    lock.unlock();
+                }
             }
             count.countDown();
         }, "thread_1"
         );
         Thread thread2 = new Thread(() -> {
             for (int i = 0; i < LOOP_SIZE; i++) {
-                number++;
+                lock.lock();
+                try {
+                    number++;
+                } finally {
+                    lock.unlock();
+                }
             }
             count.countDown();
         }, "thread_2"
