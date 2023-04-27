@@ -1,6 +1,6 @@
 package com.demo;
 
-import com.demo.jvm.ReflectDemo;
+import com.demo.thread.SelfLockDemo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -62,6 +62,7 @@ public class Main {
         //new ReentrantLockDemo().reentrantLockTest();
         //new ReadWriteLockDemo().readWriteLockTest();
         //new StampedLockDemo().test();
+        new SelfLockDemo().test();
 
         //new ImplDemo().test();
 
@@ -98,6 +99,6 @@ public class Main {
         //new ReflectDemo().test();
         //new ReflectDemo().performance();
         //new ReflectDemo().generic();
-        new ReflectDemo().annotation();
+        //new ReflectDemo().annotation();
     }
 }
