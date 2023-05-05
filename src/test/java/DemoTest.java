@@ -1,3 +1,5 @@
+import com.demo.bean.Cow;
+import com.demo.extend.Animal;
 import com.demo.extend.SubClass;
 import com.demo.extend.SubClass2;
 import lombok.extern.slf4j.Slf4j;
@@ -157,12 +159,19 @@ public class DemoTest {
         List<Object> list = new ArrayList<>();
         list.add("s");
         list.add(1);
+        list.add(new Cow());
         list.forEach(i -> {
             if (i instanceof String) {
                 log.info("{} is string", i);
             }
             if (i instanceof Integer) {
                 log.info("{} is int", i);
+            }
+            if (i instanceof Animal) {
+                log.info("{} is Animal", i);
+            }
+            if (i instanceof Cow) {
+                log.info("{} is Cow", i);
             }
         });
     }
