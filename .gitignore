@@ -39,8 +39,6 @@ build/
 .DS_Store
 
 
-#/.idea
-/log
-/target
-
-/.gradle
+.idea
+log
+.gradle
