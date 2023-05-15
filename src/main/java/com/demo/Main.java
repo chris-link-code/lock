@@ -1,6 +1,6 @@
 package com.demo;
 
-import com.demo.jvm.GCDemo;
+import com.demo.jvm.ClassLoadDemo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -94,13 +94,13 @@ public class Main {
         //new ClassLoadDemo().extendStatic();
         //new ClassLoadDemo().extendFinal();
         //new ClassLoadDemo().array();
-        //new ClassLoadDemo().classLoader();
+        new ClassLoadDemo().classLoader();
 
         //new ReflectDemo().test();
         //new ReflectDemo().performance();
         //new ReflectDemo().generic();
         //new ReflectDemo().annotation();
 
-        new GCDemo().allocate();
+        //new GCDemo().allocate();
     }
 }

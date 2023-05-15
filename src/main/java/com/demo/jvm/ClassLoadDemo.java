@@ -70,5 +70,18 @@ public class ClassLoadDemo {
         for (String path : split) {
             log.info("java.class.path: {}", path);
         }
+
+        ClassLoader classLoader = ClassLoadDemo.class.getClassLoader();
+        StringBuilder tree = new StringBuilder("|-- ");
+        boolean hasParent = true;
+        while (hasParent) {
+            System.out.println(tree.toString() + classLoader);
+            if (classLoader == null) {
+                hasParent = false;
+            } else {
+                classLoader = classLoader.getParent();
+                tree.insert(0, "\t");
+            }
+        }
     }
 }
